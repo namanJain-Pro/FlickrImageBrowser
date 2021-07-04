@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Flickr Image Browser</string>
+    <string name="place_holder">Place Holder</string>
+    <string name="search">Search</string>
+    <string name="searchable_hints">Photo Tag</string>
+    <string name="not_found">No search result found\n\nSearch again</string>
+</resources>
