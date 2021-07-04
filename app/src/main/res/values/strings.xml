@@ -4,4 +4,7 @@
     <string name="search">Search</string>
     <string name="searchable_hints">Photo Tag</string>
     <string name="not_found">No search result found\n\nSearch again</string>
+    <string name="splashscreen">SplashScreen</string>
+    <string name="flickr_image_browser">Flickr Image Browser</string>
+    <string name="powered_by">Powered By</string>
 </resources>
