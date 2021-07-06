@@ -61,6 +61,22 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String searchQuery = sharedPreferences.getString(FLICKR_QUERY, "");
+        ParseFlickrJsonData parser = new ParseFlickrJsonData(this, baseURL, false);
+
+        if (!(searchQuery.length() > 0)) {
+            parser.execute(randomTags());
+        } else {
+            tags = parseSearchQuery(searchQuery);
+            parser.execute(tags);
+            Log.d(TAG, "onResume: Search Tags - " + tags);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
@@ -77,23 +93,6 @@ public class MainActivity extends BaseActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String searchQuery = sharedPreferences.getString(FLICKR_QUERY, "");
-        ParseFlickrJsonData parser = new ParseFlickrJsonData(this, baseURL, false);
-
-        if (!(searchQuery.length() > 0)) {
-            parser.execute(randomTags());
-        } else {
-            tags = parseSearchQuery(searchQuery);
-            parser.execute(tags);
-            Log.d(TAG, "onResume: Search Tags - " + tags);
-        }
-
     }
 
     @Override

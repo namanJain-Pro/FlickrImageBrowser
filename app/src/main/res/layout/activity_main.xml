@@ -10,17 +10,12 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
-
-
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/myToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:title="@string/app_name"
                 app:layout_scrollFlags="scroll|enterAlways"/>
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main"/>
