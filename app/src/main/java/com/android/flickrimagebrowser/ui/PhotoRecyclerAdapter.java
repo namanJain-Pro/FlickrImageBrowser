@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.flickrimagebrowser.R;
 import com.android.flickrimagebrowser.data.Photo;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,9 +43,19 @@ public class PhotoRecyclerAdapter extends RecyclerView.Adapter<PhotoRecyclerAdap
 
         Photo photo = mPhotoList.get(position);
         Picasso.get().load(photo.getImageLink())
-                .error(R.drawable.place_holder)
-                .placeholder(R.drawable.place_holder)
-                .into(holder.mImageView);
+                .error(R.drawable.ic_baseline_error_24)
+                .into(holder.mImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                        holder.mImageView.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
 
 
         holder.mTextView.setText(photo.getTitle());
@@ -66,11 +78,13 @@ public class PhotoRecyclerAdapter extends RecyclerView.Adapter<PhotoRecyclerAdap
     public static class PhotoViewHolder extends RecyclerView.ViewHolder {
         ImageView mImageView;
         TextView mTextView;
+        ProgressBar progressBar;
 
         public PhotoViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
             mTextView = itemView.findViewById(R.id.textView);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }
