@@ -49,6 +49,9 @@ public class PhotoRecyclerAdapter extends RecyclerView.Adapter<PhotoRecyclerAdap
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.GONE);
                         holder.mImageView.setVisibility(View.VISIBLE);
+
+                        holder.mImageView.setAlpha(0f);
+                        holder.mImageView.animate().setDuration(500).alpha(1f).start();
                     }
 
                     @Override
